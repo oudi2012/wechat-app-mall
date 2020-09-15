@@ -47,7 +47,7 @@ Page({
       success: function(res) {
         if (res.confirm) {
           WXAPI.orderClose(wx.getStorageSync('token'), orderId).then(function(res) {
-            if (res.code == 0) {
+            if (res.code === 0) {
               that.onShow();
             }
           })
@@ -82,7 +82,7 @@ Page({
     let money = e.currentTarget.dataset.money;
     const needScore = e.currentTarget.dataset.score;
     WXAPI.userAmount(wx.getStorageSync('token')).then(function(res) {
-      if (res.code == 0) {
+      if (res.code === 0) {
         // 增加提示框
         if (res.data.score < needScore) {
           wx.showToast({
@@ -138,7 +138,7 @@ Page({
   },
   onLoad: function(options) {
     if (options && options.type) {
-      if (options.type == 99) {
+      if (options.type === 99) {
         this.setData({
           hasRefund: true
         });
@@ -155,7 +155,7 @@ Page({
   },
   getOrderStatistics() {
     WXAPI.orderStatistics(wx.getStorageSync('token')).then(res => {
-      if (res.code == 0) {
+      if (res.code === 0) {
         const badges = this.data.badges;
         badges[1] = res.data.count_id_no_pay
         badges[2] = res.data.count_id_no_transfer
@@ -202,12 +202,12 @@ Page({
     if (!postData.hasRefund) {
       postData.status = that.data.status;
     }
-    if (postData.status == 9999) {
+    if (postData.status === 9999) {
       postData.status = ''
     }
     this.getOrderStatistics();
     WXAPI.orderList(postData).then(function(res) {
-      if (res.code == 0) {
+      if (res.code === 0) {
         that.setData({
           orderList: res.data.orderList,
           logisticsMap: res.data.logisticsMap,

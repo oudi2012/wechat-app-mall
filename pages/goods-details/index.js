@@ -51,7 +51,7 @@ Page({
       return
     }
     const res = await WXAPI.shippingCarInfo(token)
-    if (res.code == 0) {
+    if (res.code === 0) {
       this.setData({
         shopNum: res.data.number
       })
@@ -70,7 +70,7 @@ Page({
   },
   async goodsFavCheck() {
     const res = await WXAPI.goodsFavCheck(wx.getStorageSync('token'), this.data.goodsId)
-    if (res.code == 0) {
+    if (res.code === 0) {
       this.setData({
         faved: true
       })
@@ -104,7 +104,7 @@ Page({
     const that = this;
     const goodsDetailRes = await WXAPI.goodsDetail(goodsId)
     const goodsKanjiaSetRes = await WXAPI.kanjiaSet(goodsId)
-    if (goodsDetailRes.code == 0) {
+    if (goodsDetailRes.code === 0) {
       var selectSizeTemp = SelectSizePrefix;
       if (goodsDetailRes.data.properties) {
         for (var i = 0; i < goodsDetailRes.data.properties.length; i++) {
@@ -136,7 +136,7 @@ Page({
         buyNumMax: goodsDetailRes.data.basicInfo.stores,
         buyNumber: (goodsDetailRes.data.basicInfo.stores > 0) ? 1 : 0
       }
-      if (goodsKanjiaSetRes.code == 0) {
+      if (goodsKanjiaSetRes.code === 0) {
         _data.curGoodsKanjia = goodsKanjiaSetRes.data[0]
         that.data.kjId = _data.curGoodsKanjia.id
         // 获取当前砍价进度
@@ -145,16 +145,16 @@ Page({
         }
         const curKanjiaprogress = await WXAPI.kanjiaDetail(_data.curGoodsKanjia.id, that.data.kjJoinUid)
         const myHelpDetail = await WXAPI.kanjiaHelpDetail(wx.getStorageSync('token'), _data.curGoodsKanjia.id, that.data.kjJoinUid)
-        if (curKanjiaprogress.code == 0) {
+        if (curKanjiaprogress.code === 0) {
           _data.curKanjiaprogress = curKanjiaprogress.data
         }
-        if (myHelpDetail.code == 0) {
+        if (myHelpDetail.code === 0) {
           _data.myHelpDetail = myHelpDetail.data
         }
       }
       if (goodsDetailRes.data.basicInfo.pingtuan) {
         const pingtuanSetRes = await WXAPI.pingtuanSet(goodsId)
-        if (pingtuanSetRes.code == 0) {
+        if (pingtuanSetRes.code === 0) {
           _data.pingtuanSet = pingtuanSetRes.data
           // 如果是拼团商品， 默认显示拼团价格
           _data.selectSizePrice = goodsDetailRes.data.basicInfo.pingtuanPrice
@@ -165,7 +165,7 @@ Page({
   },
   async shopSubdetail(shopId){
     const res = await WXAPI.shopSubdetail(shopId)
-    if (res.code == 0) {
+    if (res.code === 0) {
       this.setData({
         shopSubdetail: res.data
       })
@@ -274,15 +274,15 @@ Page({
       })
     })
     let canSubmit = false;
-    if (needSelectNum == curSelectNum) {
+    if (needSelectNum === curSelectNum) {
       canSubmit = true;
     }
     // 计算当前价格
     if (canSubmit) {
       const res = await WXAPI.goodsPrice(this.data.goodsDetail.basicInfo.id, propertyChildIds)
-      if (res.code == 0) {
+      if (res.code === 0) {
         let _price = res.data.price
-        if (this.data.shopType == 'toPingtuan') {
+        if (this.data.shopType === 'toPingtuan') {
           _price = res.data.pingtuanPrice
         }
         this.setData({
@@ -299,7 +299,7 @@ Page({
     let skuGoodsPic = this.data.skuGoodsPic
     if (this.data.goodsDetail.subPics && this.data.goodsDetail.subPics.length > 0) {
       const _subPic = this.data.goodsDetail.subPics.find(ele => {
-        return ele.optionValueId == child.id
+        return ele.optionValueId === child.id
       })
       if (_subPic) {
         skuGoodsPic = _subPic.pic
@@ -351,7 +351,7 @@ Page({
       })
     }
     const res = await WXAPI.shippingCarInfoAddItem(token, goodsId, this.data.buyNumber, sku)
-    if (res.code != 0) {
+    if (res.code !== 0) {
       wx.showToast({
         title: res.msg,
         icon: 'none'
@@ -405,20 +405,20 @@ Page({
       data: buyNowInfo
     })
     this.closePopupTap();
-    if (shoptype == 'toPingtuan') {
+    if (shoptype === 'toPingtuan') {
       if (this.data.pingtuanopenid) {
         wx.navigateTo({
           url: "/pages/to-pay-order/index?orderType=buyNow&pingtuanOpenId=" + this.data.pingtuanopenid
         })
       } else {
         WXAPI.pingtuanOpen(wx.getStorageSync('token'), that.data.goodsDetail.basicInfo.id).then(function(res) {
-          if (res.code == 2000) {
+          if (res.code === 2000) {
             that.setData({
               wxlogin: false
             })
             return
           }
-          if (res.code != 0) {
+          if (res.code !== 0) {
             wx.showToast({
               title: res.msg,
               icon: 'none',
@@ -450,7 +450,7 @@ Page({
     shopCarMap.propertyChildIds = this.data.propertyChildIds;
     shopCarMap.label = this.data.propertyChildNames;
     shopCarMap.price = this.data.selectSizePrice;
-    // if (shoptype == 'toPingtuan') { // 20190714 拼团价格注释掉
+    // if (shoptype === 'toPingtuan') { // 20190714 拼团价格注释掉
     //   shopCarMap.price = this.data.goodsDetail.basicInfo.pingtuanPrice;
     // }
     shopCarMap.score = this.data.totalScoreToPay;
@@ -468,7 +468,7 @@ Page({
     /*    var hasSameGoodsIndex = -1;
         for (var i = 0; i < toBuyInfo.shopList.length; i++) {
           var tmpShopCarMap = toBuyInfo.shopList[i];
-          if (tmpShopCarMap.goodsId == shopCarMap.goodsId && tmpShopCarMap.propertyChildIds == shopCarMap.propertyChildIds) {
+          if (tmpShopCarMap.goodsId === shopCarMap.goodsId && tmpShopCarMap.propertyChildIds === shopCarMap.propertyChildIds) {
             hasSameGoodsIndex = i;
             shopCarMap.number = shopCarMap.number + tmpShopCarMap.number;
             break;
@@ -507,7 +507,7 @@ Page({
     WXAPI.goodsReputation({
       goodsId: goodsId
     }).then(function(res) {
-      if (res.code == 0) {
+      if (res.code === 0) {
         that.setData({
           reputation: res.data
         });
@@ -520,7 +520,7 @@ Page({
       goodsId: goodsId,
       status: 0
     }).then(function(res) {
-      if (res.code == 0) {
+      if (res.code === 0) {
         that.setData({
           pingtuanList: res.data.result
         });
@@ -530,7 +530,7 @@ Page({
   getVideoSrc: function(videoId) {
     var that = this;
     WXAPI.videoDetail(videoId).then(function(res) {
-      if (res.code == 0) {
+      if (res.code === 0) {
         that.setData({
           videoMp4Src: res.data.fdMp4
         });
@@ -559,7 +559,7 @@ Page({
     })
     WXAPI.kanjiaJoin(wx.getStorageSync('token'), _this.data.curGoodsKanjia.id).then(function(res) {
       wx.hideLoading()
-      if (res.code == 0) {
+      if (res.code === 0) {
         _this.setData({
           kjJoinUid: wx.getStorageSync('uid'),
           myHelpDetail: null
@@ -598,7 +598,7 @@ Page({
   helpKanjiaDone(){
     const _this = this;
     WXAPI.kanjiaHelp(wx.getStorageSync('token'), _this.data.kjId, _this.data.kjJoinUid, '').then(function (res) {
-      if (res.code != 0) {
+      if (res.code !== 0) {
         wx.showToast({
           title: res.msg,
           icon: 'none'
@@ -652,7 +652,7 @@ Page({
       autoColor: true,
       expireHours: 1
     })
-    if (qrcodeRes.code != 0) {
+    if (qrcodeRes.code !== 0) {
       wx.showToast({
         title: qrcodeRes.msg,
         icon: 'none'

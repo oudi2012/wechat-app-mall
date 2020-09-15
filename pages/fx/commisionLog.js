@@ -31,7 +31,7 @@ Page({
     WXAPI.fxCommisionLog({
       token: wx.getStorageSync('token')
     }).then(res => {
-      if (res.code == 0) {
+      if (res.code === 0) {
         _this.setData({
           commisionLog: res.data.result
         })

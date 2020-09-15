@@ -55,7 +55,7 @@ Page({
       return
     }
     const res = await WXAPI.shippingCarInfo(token)
-    if (res.code == 0) {
+    if (res.code === 0) {
       this.setData({
         shippingCarInfo: res.data
       })
@@ -72,7 +72,7 @@ Page({
   },
 
   touchS: function(e) {
-    if (e.touches.length == 1) {
+    if (e.touches.length === 1) {
       this.setData({
         startX: e.touches[0].clientX
       });
@@ -80,12 +80,12 @@ Page({
   },
   touchM: function(e) {
     const index = e.currentTarget.dataset.index;
-    if (e.touches.length == 1) {
+    if (e.touches.length === 1) {
       var moveX = e.touches[0].clientX;
       var disX = this.data.startX - moveX;
       var delBtnWidth = this.data.delBtnWidth;
       var left = "";
-      if (disX == 0 || disX < 0) { //如果移动距离小于等于0，container位置不变
+      if (disX === 0 || disX < 0) { //如果移动距离小于等于0，container位置不变
         left = "margin-left:0px";
       } else if (disX > 0) { //移动距离大于0，container left值等于手指移动距离
         left = "margin-left:-" + disX + "px";
@@ -102,7 +102,7 @@ Page({
 
   touchE: function(e) {
     var index = e.currentTarget.dataset.index;
-    if (e.changedTouches.length == 1) {
+    if (e.changedTouches.length === 1) {
       var endX = e.changedTouches[0].clientX;
       var disX = this.data.startX - endX;
       var delBtnWidth = this.data.delBtnWidth;
@@ -121,7 +121,7 @@ Page({
   async delItemDone(key){
     const token = wx.getStorageSync('token')
     const res = await WXAPI.shippingCarInfoRemoveItem(token, key)
-    if (res.code != 0 && res.code != 700) {
+    if (res.code !== 0 && res.code !== 700) {
       wx.showToast({
         title: res.msg,
         icon:'none'

@@ -30,7 +30,7 @@ function wxpay(type, money, orderId, redirectUrl, data) {
     postData.nextAction = JSON.stringify(postData.nextAction);  
   }
   WXAPI.wxpay(postData).then(function (res) {
-    if (res.code == 0) {
+    if (res.code === 0) {
       // 发起支付
       wx.requestPayment({
         timeStamp: res.data.timeStamp,

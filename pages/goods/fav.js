@@ -28,7 +28,7 @@ Page({
     }    
     const res = await WXAPI.goodsFavList(_data)
     wx.hideLoading()
-    if (res.code == 0) {
+    if (res.code === 0) {
       this.setData({
         goods: res.data,
       })
@@ -41,7 +41,7 @@ Page({
   async removeFav(e){
     const id = e.currentTarget.dataset.id
     const res = await WXAPI.goodsFavDelete(wx.getStorageSync('token'), '', id)
-    if (res.code == 0) {
+    if (res.code === 0) {
       wx.showToast({
         title: '取消收藏',
         icon: 'success'

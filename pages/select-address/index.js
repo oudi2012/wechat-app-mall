@@ -58,11 +58,11 @@ Page({
   initShippingAddress: function() {
     var that = this;
     WXAPI.queryAddress(wx.getStorageSync('token')).then(function(res) {
-      if (res.code == 0) {
+      if (res.code === 0) {
         that.setData({
           addressList: res.data
         });
-      } else if (res.code == 700) {
+      } else if (res.code === 700) {
         that.setData({
           addressList: null
         });

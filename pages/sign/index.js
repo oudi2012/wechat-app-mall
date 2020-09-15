@@ -44,7 +44,7 @@ Page({
     WXAPI.scoreSignLogs({
       token: wx.getStorageSync('token')
     }).then(res => {
-      if (res.code == 0) {
+      if (res.code === 0) {
         res.data.result.forEach(ele => {
           const _data = ele.dateAdd.split(" ")[0]
           this.calendar.setTodoLabels({
@@ -67,9 +67,9 @@ Page({
     // console.log('y:', myDate.getFullYear())
     // console.log('m:', myDate.getMonth() + 1)
     // console.log('d:', myDate.getDate())
-    if (myDate.getFullYear() != e.detail.year ||
-      (myDate.getMonth() + 1) != e.detail.month ||
-      myDate.getDate() != e.detail.day) {
+    if (myDate.getFullYear() !== e.detail.year ||
+      (myDate.getMonth() + 1) !== e.detail.month ||
+      myDate.getDate() !== e.detail.day) {
       return
     }
     if (e.detail.showTodoLabel) {

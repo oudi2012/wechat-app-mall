@@ -56,7 +56,7 @@ Page({
     const _this = this
     const token = wx.getStorageSync('token')
     WXAPI.userAmount(token).then(function (res) {
-      if (res.code == 0) {
+      if (res.code === 0) {
         _this.setData({
           growth: res.data.growth
         });
@@ -73,7 +73,7 @@ Page({
       page: 1,
       pageSize: 50
     }).then(res => {
-      if (res.code == 0) {
+      if (res.code === 0) {
         _this.setData({
           cashlogs: res.data.result
         })

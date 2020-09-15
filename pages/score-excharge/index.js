@@ -53,7 +53,7 @@ Page({
     var that = this;
     var amount = e.detail.value.amount;
 
-    if (amount == "") {
+    if (amount === "") {
       wx.showModal({
         title: '错误',
         content: '请填写正确的券号',
@@ -62,7 +62,7 @@ Page({
       return
     }
     WXAPI.scoreExchange(wx.getStorageSync('token'), amount).then(function(res) {
-      if (res.code == 700) {
+      if (res.code === 700) {
         wx.showModal({
           title: '错误',
           content: '券号不正确',
@@ -70,7 +70,7 @@ Page({
         })
         return
       }
-      if (res.code == 0) {
+      if (res.code === 0) {
         wx.showModal({
           title: '成功',
           content: '恭喜您，成功兑换 ' + res.data.score + ' 积分',

@@ -13,7 +13,7 @@ Page({
   onShow: function () {
     var that = this;
     WXAPI.orderDetail(wx.getStorageSync('token'), '', this.data.hxNumber).then(function (res) {
-      if (res.code != 0) {
+      if (res.code !== 0) {
         wx.showModal({
           title: '错误',
           content: res.msg,
@@ -41,7 +41,7 @@ Page({
       success: function (res) {
         if (res.confirm) {
           WXAPI.orderDelivery(wx.getStorageSync('token'), orderId).then(function (res) {
-            if (res.code == 0) {
+            if (res.code === 0) {
               that.onShow();
             }
           })
@@ -73,7 +73,7 @@ Page({
     WXAPI.orderReputation({
       postJsonString: JSON.stringify(postJsonString)
     }).then(function (res) {
-      if (res.code == 0) {
+      if (res.code === 0) {
         that.onShow();
       }
     })
@@ -84,7 +84,7 @@ Page({
     })
     const res = await WXAPI.orderHX(this.data.hxNumber)
     wx.hideLoading()
-    if (res.code != 0) {
+    if (res.code !== 0) {
       wx.showToast({
         title: res.msg,
         icon: 'none'

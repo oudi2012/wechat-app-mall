@@ -73,20 +73,20 @@ Page({
       return
     }
     WXAPI.userAmount(token).then(function (res) {
-      if (res.code == 700) {
+      if (res.code === 700) {
         wx.showToast({
           title: '当前账户存在异常',
           icon: 'none'
         })
         return
       }
-      if (res.code == 2000) {
+      if (res.code === 2000) {
         this.setData({
           wxlogin: false
         })
         return
       }
-      if (res.code == 0) {
+      if (res.code === 0) {
         _this.setData({
           balance: res.data.balance.toFixed(2),
           freeze: res.data.freeze.toFixed(2),
@@ -98,13 +98,13 @@ Page({
     this.fetchTabData(this.data.activeIndex)
   },
   fetchTabData(activeIndex){
-    if (activeIndex == 0) {
+    if (activeIndex === 0) {
       this.cashLogs()
     }
-    if (activeIndex == 1) {
+    if (activeIndex === 1) {
       this.withDrawlogs()
     }
-    if (activeIndex == 2) {
+    if (activeIndex === 2) {
       this.depositlogs()
     }
   },
@@ -115,7 +115,7 @@ Page({
       page:1,
       pageSize:50
     }).then(res => {
-      if (res.code == 0) {
+      if (res.code === 0) {
         _this.setData({
           cashlogs: res.data.result
         })
@@ -129,7 +129,7 @@ Page({
       page:1,
       pageSize:50
     }).then(res => {
-      if (res.code == 0) {
+      if (res.code === 0) {
         _this.setData({
           withDrawlogs: res.data
         })
@@ -143,7 +143,7 @@ Page({
       page:1,
       pageSize:50
     }).then(res => {
-      if (res.code == 0) {
+      if (res.code === 0) {
         _this.setData({
           depositlogs: res.data.result
         })

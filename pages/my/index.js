@@ -57,7 +57,7 @@ Page({
     })
   },
   getPhoneNumber: function(e) {
-    if (!e.detail.errMsg || e.detail.errMsg != "getPhoneNumber:ok") {
+    if (!e.detail.errMsg || e.detail.errMsg !== "getPhoneNumber:ok") {
       wx.showModal({
         title: '提示',
         content: e.detail.errMsg,
@@ -72,7 +72,7 @@ Page({
         })
         return
       }
-      if (res.code == 0) {
+      if (res.code === 0) {
         wx.showToast({
           title: '绑定成功',
           icon: 'success',
@@ -91,13 +91,13 @@ Page({
   getUserApiInfo: function () {
     var that = this;
     WXAPI.userDetail(wx.getStorageSync('token')).then(function (res) {
-      if (res.code == 0) {
+      if (res.code === 0) {
         let _data = {}
         _data.apiUserInfoMap = res.data
         if (res.data.base.mobile) {
           _data.userMobile = res.data.base.mobile
         }
-        if (that.data.order_hx_uids && that.data.order_hx_uids.indexOf(res.data.base.id) != -1) {
+        if (that.data.order_hx_uids && that.data.order_hx_uids.indexOf(res.data.base.id) !== -1) {
           _data.canHX = true // 具有扫码核销的权限
         }
         that.setData(_data);
@@ -107,7 +107,7 @@ Page({
   getUserAmount: function () {
     var that = this;
     WXAPI.userAmount(wx.getStorageSync('token')).then(function (res) {
-      if (res.code == 0) {
+      if (res.code === 0) {
         that.setData({
           balance: res.data.balance.toFixed(2),
           freeze: res.data.freeze.toFixed(2),
@@ -122,7 +122,7 @@ Page({
   },
   orderStatistics: function () {
     WXAPI.orderStatistics(wx.getStorageSync('token')).then((res) => {
-      if (res.code == 0) {
+      if (res.code === 0) {
         const {
           count_id_no_confirm,
           count_id_no_pay,

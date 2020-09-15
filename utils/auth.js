@@ -25,7 +25,7 @@ async function checkHasLogined() {
     return false
   }
   const checkTokenRes = await WXAPI.checkToken(token)
-  if (checkTokenRes.code != 0) {
+  if (checkTokenRes.code !== 0) {
     wx.removeStorageSync('token')
     return false
   }
@@ -68,12 +68,12 @@ async function login(page){
   wx.login({
     success: function (res) {
       WXAPI.login_wx(res.code).then(function (res) {        
-        if (res.code == 10000) {
+        if (res.code === 10000) {
           // 去注册
           //_this.register(page)
           return;
         }
-        if (res.code != 0) {
+        if (res.code !== 0) {
           // 登录错误
           wx.showModal({
             title: '无法登录',

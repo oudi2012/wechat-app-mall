@@ -44,7 +44,7 @@ Page({
     let shopList = [];
     const token = wx.getStorageSync('token')
     //立即购买下单
-    if ("buyNow" == this.data.orderType) {
+    if ("buyNow" === this.data.orderType) {
       var buyNowInfoMem = wx.getStorageSync('buyNowInfo');
       this.data.kjId = buyNowInfoMem.kjId;
       if (buyNowInfoMem && buyNowInfoMem.shopList) {
@@ -53,7 +53,7 @@ Page({
     } else {
       //购物车下单
       const res = await WXAPI.shippingCarInfo(token)
-      if (res.code == 0) {
+      if (res.code === 0) {
         shopList = res.data.items
       }
     }
@@ -125,16 +125,16 @@ Page({
     if (that.data.pingtuanOpenId) {
       postData.pingtuanOpenId = that.data.pingtuanOpenId
     }
-    if (postData.peisongType == 'kd' && that.data.curAddressData && that.data.curAddressData.provinceId) {
+    if (postData.peisongType === 'kd' && that.data.curAddressData && that.data.curAddressData.provinceId) {
       postData.provinceId = that.data.curAddressData.provinceId;
     }
-    if (postData.peisongType == 'kd' && that.data.curAddressData && that.data.curAddressData.cityId) {
+    if (postData.peisongType === 'kd' && that.data.curAddressData && that.data.curAddressData.cityId) {
       postData.cityId = that.data.curAddressData.cityId;
     }
-    if (postData.peisongType == 'kd' && that.data.curAddressData && that.data.curAddressData.districtId) {
+    if (postData.peisongType === 'kd' && that.data.curAddressData && that.data.curAddressData.districtId) {
       postData.districtId = that.data.curAddressData.districtId;
     }
-    if (e && that.data.isNeedLogistics > 0 && postData.peisongType == 'kd') {
+    if (e && that.data.isNeedLogistics > 0 && postData.peisongType === 'kd') {
       if (!that.data.curAddressData) {
         wx.hideLoading();
         wx.showToast({
@@ -143,7 +143,7 @@ Page({
         })
         return;
       }
-      if (postData.peisongType == 'kd') {
+      if (postData.peisongType === 'kd') {
         postData.address = that.data.curAddressData.address;
         postData.linkMan = that.data.curAddressData.linkMan;
         postData.mobile = that.data.curAddressData.mobile;
@@ -156,14 +156,14 @@ Page({
     if (!e) {
       postData.calculate = "true";
     } else {
-      if(postData.peisongType == 'zq' && this.data.shops && this.data.shopIndex == -1) {
+      if(postData.peisongType === 'zq' && this.data.shops && this.data.shopIndex === -1) {
         wx.showToast({
           title: '请选择自提门店',
           icon: 'none'
         })
         return;
       }
-      if(postData.peisongType == 'zq' && this.data.shops) {
+      if(postData.peisongType === 'zq' && this.data.shops) {
         postData.shopIdZt = this.data.shops[this.data.shopIndex].id
         postData.shopNameZt = this.data.shops[this.data.shopIndex].name
       }
@@ -171,7 +171,7 @@ Page({
 
     WXAPI.orderCreate(postData).then(function (res) {
       that.data.pageIsEnd = true
-      if (res.code != 0) {
+      if (res.code !== 0) {
         that.data.pageIsEnd = false
         wx.showModal({
           title: '错误',
@@ -181,7 +181,7 @@ Page({
         return;
       }
 
-      if (e && "buyNow" != that.data.orderType) {
+      if (e && "buyNow" !== that.data.orderType) {
         // 清空购物车数据
         WXAPI.shippingCarInfoRemoveAll(loginToken)
       }
@@ -214,7 +214,7 @@ Page({
   async processAfterCreateOrder(res) {
     // 直接弹出支付，取消支付的话，去订单列表
     const res1 = await WXAPI.userAmount(wx.getStorageSync('token'))
-    if (res1.code != 0) {
+    if (res1.code !== 0) {
       wx.showToast({
         title: '无法获取用户资金信息',
         icon: 'none'
@@ -237,7 +237,7 @@ Page({
           if (res2.confirm) {
             // 使用余额支付
             WXAPI.orderPay(wx.getStorageSync('token'), res.data.id).then(res3 => {
-              if (res3.code != 0) {
+              if (res3.code !== 0) {
                 wx.showToast({
                   title: res3.msg,
                   icon: 'none'
@@ -261,7 +261,7 @@ Page({
   },
   async initShippingAddress() {
     const res = await WXAPI.defaultAddress(wx.getStorageSync('token'))
-    if (res.code == 0) {
+    if (res.code === 0) {
       this.setData({
         curAddressData: res.data.info
       });
@@ -274,7 +274,7 @@ Page({
   },
   processYunfei() {
     var goodsList = this.data.goodsList
-    if (goodsList.length == 0) {
+    if (goodsList.length === 0) {
       return
     }
     var goodsJsonStr = "[";
@@ -340,7 +340,7 @@ Page({
       peisongType: e.detail.value
     })
     this.processYunfei()
-    if (e.detail.value == 'zq') {
+    if (e.detail.value === 'zq') {
       this.fetchShops()
     }
   },
@@ -359,12 +359,12 @@ Page({
   },
   async fetchShops(){
     const res = await WXAPI.fetchShops()
-    if (res.code == 0) {
+    if (res.code === 0) {
       let shopIndex = this.data.shopIndex
       const shopInfo = wx.getStorageSync('shopInfo')
       if (shopInfo) {
         shopIndex = res.data.findIndex(ele => {
-          return ele.id == shopInfo.id
+          return ele.id === shopInfo.id
         })
       }
       this.setData({

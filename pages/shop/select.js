@@ -48,7 +48,7 @@ Page({
       curlongitude: longitude,
       nameLike: kw
     })
-    if (res.code == 0) {
+    if (res.code === 0) {
       res.data.forEach(ele => {
         ele.distance = ele.distance.toFixed(3) // 距离保留3位小数
       })

@@ -12,8 +12,8 @@
   </view>
   <view class="goods-info">
     <view class="goods-title">{{goodsDetail.basicInfo.name}}</view>
-    <view class="goods-share" wx:if="{{goodsDetail.basicInfo.commissionType == 1}}">分享有赏，好友下单后可得 {{goodsDetail.basicInfo.commission}} 积分奖励</view>
-    <view class="goods-share" wx:if="{{goodsDetail.basicInfo.commissionType == 2}}">分享有赏，好友下单后可得 {{goodsDetail.basicInfo.commission}}元 现金奖励</view>
+    <view class="goods-share" wx:if="{{goodsDetail.basicInfo.commissionType === 1}}">分享有赏，好友下单后可得 {{goodsDetail.basicInfo.commission}} 积分奖励</view>
+    <view class="goods-share" wx:if="{{goodsDetail.basicInfo.commissionType === 2}}">分享有赏，好友下单后可得 {{goodsDetail.basicInfo.commission}}元 现金奖励</view>
     <view class="goods-profile">
       <view class="p"><text>¥</text> {{selectSizePrice}}</view>
       <view wx:if="{{goodsDetail.basicInfo.originalPrice && goodsDetail.basicInfo.originalPrice > 0}}" class="goods-price" style='color:#aaa;text-decoration:line-through;padding: 15rpx 0rpx 0rpx 15rpx;'><text>¥</text> {{selectSizeOPrice}}</view>
@@ -129,7 +129,7 @@
       </view>
     </view>
   </view>
-  <button wx:if="{{curGoodsKanjia && (!curKanjiaprogress || curKanjiaprogress.kanjiaInfo.uid != curuid)}}" class="weui-btn" type="warn" bindtap="joinKanjia" style='width:700rpx;'>我也要报名参与</button>
+  <button wx:if="{{curGoodsKanjia && (!curKanjiaprogress || curKanjiaprogress.kanjiaInfo.uid !== curuid)}}" class="weui-btn" type="warn" bindtap="joinKanjia" style='width:700rpx;'>我也要报名参与</button>
   <view class='space'></view>
   <view class="goods-des-info" style="margin-top:35rpx;" wx:if="{{pingtuanList}}">
     <view class="label-title" style="border-bottom:1px solid #eee;">{{pingtuanList.length}}人在拼单，可直接参与</view>
@@ -165,7 +165,7 @@
     <view class="buy-num-box">
       <view class="num-label">购买数量</view>
       <view class="num-box">
-        <view class="num-jian {{buyNumber == buyNumMin ? 'hui': ''}}" bindtap="numJianTap">-</view>
+        <view class="num-jian {{buyNumber === buyNumMin ? 'hui': ''}}" bindtap="numJianTap">-</view>
         <view class="num-input">
           <input type="number" value="{{buyNumber}}" disabled/>
         </view>
@@ -217,7 +217,7 @@
     </view>
   </view>
   <view class='kjBuyButton' wx:if="{{curGoodsKanjia && curKanjiaprogress}}">
-    <view class="item" wx:if="{{curKanjiaprogress.kanjiaInfo.uid != curuid}}">
+    <view class="item" wx:if="{{curKanjiaprogress.kanjiaInfo.uid !== curuid}}">
       <van-button type="primary" block bind:click="helpKanjia" disabled="{{myHelpDetail}}">{{myHelpDetail?"您已砍过":"帮TA砍"}}</van-button>
     </view>
     <view class="item" wx:else>
@@ -268,7 +268,7 @@
       <view class="buy-num-box">
         <view class="num-label">购买数量</view>
         <view class="num-box">
-          <view class="num-jian {{buyNumber == buyNumMin ? 'hui': ''}}" bindtap="numJianTap">-</view>
+          <view class="num-jian {{buyNumber === buyNumMin ? 'hui': ''}}" bindtap="numJianTap">-</view>
           <view class="num-input">
             <input type="number" value="{{buyNumber}}" disabled/>
           </view>

@@ -43,11 +43,11 @@ Page({
   async initData(){
     const token = wx.getStorageSync('token')
     const res1 = await WXAPI.userAmount(token)
-    if (res1.code == 0) {
+    if (res1.code === 0) {
       this.data.score = res1.data.score
     }
     const res2 = await WXAPI.scoreDeductionRules(1);
-    if (res2.code == 0) {
+    if (res2.code === 0) {
       this.data.deductionRules = res2.data
     }
     this.setData({
@@ -65,7 +65,7 @@ Page({
       return
     }
     const res = await WXAPI.exchangeScoreToGrowth(wx.getStorageSync('token'), score)
-    if (res.code == 0) {
+    if (res.code === 0) {
       wx.showModal({
         title: '成功',
         content: '恭喜您，成功兑换'+ res.data +'成长值',

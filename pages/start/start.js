@@ -14,7 +14,7 @@ Page({
       title: wx.getStorageSync('mallName')
     })
     const app_show_pic_version = wx.getStorageSync('app_show_pic_version')
-    if (app_show_pic_version && app_show_pic_version == CONFIG.version) {
+    if (app_show_pic_version && app_show_pic_version === CONFIG.version) {
       if (CONFIG.shopMod) {
         wx.redirectTo({
           url: '/pages/shop/select',
@@ -29,7 +29,7 @@ Page({
       WXAPI.banners({
         type: 'app'
       }).then(function (res) {
-        if (res.code == 700) {
+        if (res.code === 700) {
           if (CONFIG.shopMod) {
             wx.redirectTo({
               url: '/pages/shop/select',
@@ -90,7 +90,7 @@ Page({
     }
   },
   imgClick(){
-    if (this.data.swiperCurrent + 1 != this.data.swiperMaxNumber) {
+    if (this.data.swiperCurrent + 1 !== this.data.swiperMaxNumber) {
       wx.showToast({
         title: '左滑进入',
         icon: 'none',

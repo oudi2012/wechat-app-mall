@@ -153,7 +153,7 @@ Page({
       remark,
       extJsonStr: JSON.stringify(extJsonStr)
     }).then(res => {
-      if (res.code == 0) {
+      if (res.code === 0) {
         wx.showModal({
           title: '成功',
           content: '提交成功，请耐心等待我们处理！',

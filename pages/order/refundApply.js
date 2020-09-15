@@ -47,7 +47,7 @@ Page({
   onShow(){
     const _this = this
     WXAPI.refundApplyDetail(wx.getStorageSync('token'), _this.data.orderId).then(res => {
-      if (res.code == 0) {
+      if (res.code === 0) {
         _this.setData({
           refundApplyDetail: res.data[0]  // baseInfo, pics
         })
@@ -57,7 +57,7 @@ Page({
   refundApplyCancel(){
     const _this = this
     WXAPI.refundApplyCancel(wx.getStorageSync('token'), _this.data.orderId).then(res => {
-      if (res.code == 0) {
+      if (res.code === 0) {
         wx.navigateTo({
           url: "/pages/order-list/index"
         })
@@ -67,7 +67,7 @@ Page({
   typeItemsChange: function (e) {
     const typeItems = this.data.typeItems;
     for (var i = 0, len = typeItems.length; i < len; ++i) {
-      typeItems[i].checked = typeItems[i].value == e.detail.value;
+      typeItems[i].checked = typeItems[i].value === e.detail.value;
     }
     this.setData({
       typeItems: typeItems,
@@ -77,7 +77,7 @@ Page({
   logisticsStatusItemsChange: function (e) {
     const logisticsStatusItems = this.data.logisticsStatusItems;
     for (var i = 0, len = logisticsStatusItems.length; i < len; ++i) {
-      logisticsStatusItems[i].checked = logisticsStatusItems[i].value == e.detail.value;
+      logisticsStatusItems[i].checked = logisticsStatusItems[i].value === e.detail.value;
     }
     this.setData({
       logisticsStatusItems: logisticsStatusItems,
@@ -113,7 +113,7 @@ Page({
     const _this = this;
     for (let i = 0; i< _this.data.files.length; i++) {
       const res = await WXAPI.uploadFile(wx.getStorageSync('token'), _this.data.files[i])
-      if (res.code == 0) {
+      if (res.code === 0) {
         _this.data.pics.push(res.data.url)
       }
     }
@@ -126,7 +126,7 @@ Page({
     // _this.data.logisticsStatus
     // _this.data.reasons[_this.data.reasonIndex]
     let amount = e.detail.value.amount;
-    if (_this.data.type == 2) {
+    if (_this.data.type === 2) {
       amount = 0.00
     }
     let remark = e.detail.value.remark;
@@ -146,7 +146,7 @@ Page({
       remark,
       pic: _this.data.pics.join()
     }).then(res => {
-      if (res.code == 0) {
+      if (res.code === 0) {
         wx.showModal({
           title: '成功',
           content: '提交成功，请耐心等待我们处理！',

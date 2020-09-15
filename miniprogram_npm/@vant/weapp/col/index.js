@@ -1,6 +1,6 @@
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
-var component_1 = require('../common/component');
+const component_1 = require('../common/component');
 component_1.VantComponent({
   relation: {
     name: 'row',
@@ -16,10 +16,10 @@ component_1.VantComponent({
   },
   methods: {
     setGutter: function (gutter) {
-      var padding = gutter / 2 + 'px';
-      var viewStyle = gutter
-        ? 'padding-left: ' + padding + '; padding-right: ' + padding + ';'
-        : '';
+      const padding = gutter / 2 + 'px';
+      const viewStyle = gutter
+          ? 'padding-left: ' + padding + '; padding-right: ' + padding + ';'
+          : '';
       if (viewStyle !== this.data.viewStyle) {
         this.setData({ viewStyle: viewStyle });
       }

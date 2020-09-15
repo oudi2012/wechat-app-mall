@@ -23,7 +23,7 @@ Date.prototype.format = function(format) {
   }
   for (var k in date) {
          if (new RegExp("(" + k + ")").test(format)) {
-                format = format.replace(RegExp.$1, RegExp.$1.length == 1
+                format = format.replace(RegExp.$1, RegExp.$1.length === 1
                        ? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
          }
   }
@@ -53,7 +53,7 @@ Page({
     wx.hideLoading({
       success: (res) => {},
     })
-    if (res.code == 0 && res.data.length > 0) {
+    if (res.code === 0 && res.data.length > 0) {
       res.data.forEach(ele => {
         if (ele.start_time) {
           ele.start_time_str = new Date(ele.start_time*1000).format('yyyy-MM-dd h:m:s')
@@ -75,7 +75,7 @@ Page({
   goLiveRoom(e) {
     const roomId = e.currentTarget.dataset.id
     const status = e.currentTarget.dataset.status
-    if (status == 107 || status == 106 || status == 104) {
+    if (status === 107 || status === 106 || status === 104) {
       return
     }
     wx.navigateTo({

@@ -1,13 +1,8 @@
-// generate time:2017-08-23 21:12:06 
-// Type definitions for wx app
-// Definitions by: hellopao <https://github.com/hellopao/wx.d.ts>
-
 /************************************************
 *                                               *
 *                 微信小程序  API                *
 *                                               *
 ************************************************/
-
 interface IAnimation {
     /**
      * 透明度，参数范围 0~1

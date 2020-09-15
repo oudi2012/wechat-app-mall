@@ -50,7 +50,7 @@ Page({
     const userDetail = await WXAPI.userDetail(wx.getStorageSync('token'))
     WXAPI.fxApplyProgress(wx.getStorageSync('token')).then(res => {
       let applyStatus = userDetail.data.base.isSeller ? 2 : -1
-      if (res.code == 2000) {
+      if (res.code === 2000) {
         this.setData({
           wxlogin: false
         })
@@ -72,7 +72,7 @@ Page({
           applyInfo: res.data
         })
       }
-      if (applyStatus == 2) {
+      if (applyStatus === 2) {
         _this.fetchQrcode()
       }
     })
@@ -94,7 +94,7 @@ Page({
       expireHours: 1
     }).then(res => {
       wx.hideLoading()
-      if (res.code == 0) {
+      if (res.code === 0) {
         _this.showCanvas(res.data)
       }
     })

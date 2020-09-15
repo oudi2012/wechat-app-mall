@@ -60,7 +60,7 @@ Page({
   async bindSave(e) {
     const _this = this    
     const amount = e.detail.value.amount;
-    if (amount == "" || amount * 1 < 0) {
+    if (amount === "" || amount * 1 < 0) {
       wx.showToast({
         title: '请填写正确的消费金额',
         icon: 'none'
@@ -68,7 +68,7 @@ Page({
       return
     }
     const userMoney = await WXAPI.userAmount(wx.getStorageSync('token'))
-    if (userMoney.code != 0) {
+    if (userMoney.code !== 0) {
       wx.showToast({
         title: userMoney.msg,
         icon: 'none'
@@ -116,7 +116,7 @@ Page({
       wxpay.wxpay('paybill', wxpayAmount, 0, "/pages/asset/index", { money: amount});
     } else {
       WXAPI.payBill(wx.getStorageSync('token'), amount).then(function (res) {
-        if (res.code == 0) {
+        if (res.code === 0) {
           wx.showModal({
             title: '成功',
             content: '买单成功，欢迎下次光临！',

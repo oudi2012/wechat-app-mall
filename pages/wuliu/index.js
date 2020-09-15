@@ -9,7 +9,7 @@ Page({
   onShow: function () {
     var that = this;
     WXAPI.orderDetail(wx.getStorageSync('token'), that.data.orderId).then(function (res) {
-      if (res.code != 0) {
+      if (res.code !== 0) {
         wx.showModal({
           title: '错误',
           content: res.msg,

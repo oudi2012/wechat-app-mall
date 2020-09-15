@@ -63,7 +63,7 @@ Page({
     const that = this;
     const amount = e.detail.value.amount;
 
-    if (amount == "" || amount * 1 < 0) {
+    if (amount === "" || amount * 1 < 0) {
       wx.showModal({
         title: '错误',
         content: '请填写正确的充值金额',

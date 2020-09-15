@@ -50,21 +50,21 @@ Page({
       token: wx.getStorageSync('token'),
       pageSize: 100000
     }).then(res => {
-      if (res.code == 700) {
+      if (res.code === 700) {
         _this.setData({
           members: [],
           number1: 0,
           number2: 0
         })
       }
-      if (res.code == 0) {
+      if (res.code === 0) {
         let number1 = 0
         let number2 = 0
         res.data.result.forEach(ele => {
-          if (ele.level == 1) {
+          if (ele.level === 1) {
             number1++
           }
-          if (ele.level == 2) {
+          if (ele.level === 2) {
             number2++
           }
         })

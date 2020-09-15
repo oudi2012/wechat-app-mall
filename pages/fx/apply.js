@@ -75,7 +75,7 @@ Page({
       return
     }
     WXAPI.fxApply(wx.getStorageSync('token'), name, mobile).then(res => {
-      if (res.code != 0) {
+      if (res.code !== 0) {
         wx.showToast({
           title: res.msg,
           icon: 'none'

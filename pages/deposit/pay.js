@@ -22,7 +22,7 @@ Page({
     const that = this;
     const amount = e.detail.value.amount;
 
-    if (amount == "" || amount * 1 < 0) {
+    if (amount === "" || amount * 1 < 0) {
       wx.showModal({
         title: '错误',
         content: '请填写正确的押金金额',
@@ -34,7 +34,7 @@ Page({
       token: wx.getStorageSync('token'),
       amount: amount
     }, 'post').then(res => {
-      if (res.code == 40000) {
+      if (res.code === 40000) {
         wx.showModal({
           title: '请先充值',
           content: res.msg,
@@ -47,7 +47,7 @@ Page({
         })
         return
       }
-      if (res.code != 0) {
+      if (res.code !== 0) {
         wx.showModal({
           title: '错误',
           content: res.msg,

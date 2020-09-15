@@ -23,7 +23,7 @@ Page({
         WXAPI.invoiceList({
           token: wx.getStorageSync('token')
         }).then(res => {
-          if (res.code == 0) {
+          if (res.code === 0) {
             _this.setData({
               invoiceList: res.data.result
             })

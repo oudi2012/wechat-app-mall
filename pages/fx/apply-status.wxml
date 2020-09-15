@@ -1,4 +1,4 @@
-<view class='noApply' wx:if="{{applyStatus == -1}}">
+<view class='noApply' wx:if="{{applyStatus === -1}}">
   <form bindsubmit="bindSave" report-submit="true">
     <image class="logo" src="/images/fx.png" mode="widthFix" />
     <view class="profile">您还不是分销商，无法使用分销功能</view>
@@ -6,7 +6,7 @@
   </form>
 </view>
 
-<view class='noApply' wx:if="{{applyStatus == 0}}">
+<view class='noApply' wx:if="{{applyStatus === 0}}">
   <form bindsubmit="goShop" report-submit="true">
     <image class="logo" src="/images/fx.png" mode="widthFix" />
     <view class="profile">感谢您的支持，请等待审核！</view>
@@ -14,7 +14,7 @@
   </form>
 </view>
 
-<view class='noApply' wx:if="{{applyStatus == 1}}">
+<view class='noApply' wx:if="{{applyStatus === 1}}">
   <form bindsubmit="goShop" report-submit="true">
     <image class="logo" src="/images/fx.png" mode="widthFix" />
     <view class="profile">很遗憾，您的申请没有通过</view>
@@ -23,7 +23,7 @@
   </form>
 </view>
 
-<view class='noApply' wx:if="{{applyStatus == 2}}">
+<view class='noApply' wx:if="{{applyStatus === 2}}">
   <canvas class="canvas" style="height:{{canvasHeight}}px" canvas-id="firstCanvas"></canvas>
   <view class="profile">扫码关注您的专属推广码，或者转发邀请好友</view>
   <view class="weui-flex">
@@ -36,7 +36,7 @@
   </view>
 </view>
 
-<button wx:if="{{currentPages.length == 1}}" class="weui-btn" style="margin:50rpx;" type="default" bindtap="goIndex">返回首页</button>
+<button wx:if="{{currentPages.length === 1}}" class="weui-btn" style="margin:50rpx;" type="default" bindtap="goIndex">返回首页</button>
 
 <import src="/template/login/index.wxml" />
 <template is="apifmLogin" data="{{wxlogin: wxlogin}}" />

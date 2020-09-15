@@ -1,6 +1,7 @@
 const WXAPI = require('apifm-wxapi')
 const AUTH = require('../../utils/auth')
-const TOOLS = require('../../utils/tools.js') // TOOLS.showTabBarBadge();
+const TOOLS = require('../../utils/tools.js')
+// TOOLS.showTabBarBadge();
 
 Page({
   /**
@@ -36,10 +37,10 @@ Page({
     let categories = [];
     let categoryName = '';
     let categoryId = '';
-    if (res.code == 0) {
+    if (res.code === 0) {
       if (this.data.categorySelected.id) {
         const _curCategory = res.data.find(ele => {
-          return ele.id == this.data.categorySelected.id
+          return ele.id === this.data.categorySelected.id
         })
         categoryName = _curCategory.name;
         categoryId = _curCategory.id;
@@ -47,7 +48,7 @@ Page({
       for (let i = 0; i < res.data.length; i++) {
         let item = res.data[i];
         categories.push(item);
-        if (i == 0 && !this.data.categorySelected.id) {
+        if (i === 0 && !this.data.categorySelected.id) {
           categoryName = item.name;
           categoryId = item.id;
         }
@@ -72,7 +73,7 @@ Page({
       pageSize: 100000
     })
     wx.hideLoading()
-    if (res.code == 700) {
+    if (res.code === 700) {
       this.setData({
         currentGoods: null
       });
@@ -88,17 +89,17 @@ Page({
     })
   },
   onCategoryClick: function(e) {
-    var that = this;
-    var id = e.target.dataset.id;
+    const that = this;
+    const id = e.target.dataset.id;
     if (id === that.data.categorySelected.id) {
       that.setData({
         scrolltop: 0,
       })
     } else {
-      var categoryName = '';
-      for (var i = 0; i < that.data.categories.length; i++) {
+      let categoryName = '';
+      for (let i = 0; i < that.data.categories.length; i++) {
         let item = that.data.categories[i];
-        if (item.id == id) {
+        if (item.id === id) {
           categoryName = item.name;
           break;
         }
@@ -152,7 +153,7 @@ Page({
   },
   async addShopCar(e) {
     const curGood = this.data.currentGoods.find(ele => {
-      return ele.id == e.currentTarget.dataset.id
+      return ele.id === e.currentTarget.dataset.id
     })
     if (!curGood) {
       return
@@ -183,10 +184,10 @@ Page({
   },
   async addShopCarDone(options){
     const res = await WXAPI.shippingCarInfoAddItem(wx.getStorageSync('token'), options.goodsId, options.buyNumber, options.sku)
-    if (res.code == 30002) {
+    if (res.code === 30002) {
       // 需要选择规格尺寸
       const skuCurGoodsRes = await WXAPI.goodsDetail(options.goodsId)
-      if (skuCurGoodsRes.code != 0) {
+      if (skuCurGoodsRes.code !== 0) {
         wx.showToast({
           title: skuCurGoodsRes.msg,
           icon: 'none'
@@ -201,7 +202,7 @@ Page({
       })
       return
     }
-    if (res.code != 0) {
+    if (res.code !== 0) {
       wx.showToast({
         title: res.msg,
         icon: 'none'
@@ -247,9 +248,9 @@ Page({
     const id = e.currentTarget.dataset.id
     // 处理选中
     const skuCurGoods = this.data.skuCurGoods
-    const property = skuCurGoods.properties.find(ele => {return ele.id == pid})
+    const property = skuCurGoods.properties.find(ele => {return ele.id === pid})
     property.childsCurGoods.forEach(ele => {
-      if (ele.id == id) {
+      if (ele.id === id) {
         ele.active = true
       } else {
         ele.active = false
@@ -273,7 +274,7 @@ Page({
         optionValueId: o.id
       })
     })
-    if (sku.length != propertySize) {
+    if (sku.length !== propertySize) {
       wx.showToast({
         title: '请选择规格',
         icon: 'none'

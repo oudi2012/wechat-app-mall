@@ -53,7 +53,7 @@ Page({
     }
     const res = await WXAPI.goods(_data)
     wx.hideLoading()
-    if (res.code == 0) {
+    if (res.code === 0) {
       this.setData({
         goods: res.data,
       })
@@ -91,7 +91,7 @@ Page({
 
   },
   changeShowType(){
-    if (this.data.listType == 1) {
+    if (this.data.listType === 1) {
       this.setData({
         listType: 2
       })
@@ -120,7 +120,7 @@ Page({
   },
   async addShopCar(e) {
     const curGood = this.data.goods.find(ele => {
-      return ele.id == e.currentTarget.dataset.id
+      return ele.id === e.currentTarget.dataset.id
     })
     if (!curGood) {
       return
@@ -151,10 +151,10 @@ Page({
   },
   async addShopCarDone(options) {
     const res = await WXAPI.shippingCarInfoAddItem(wx.getStorageSync('token'), options.goodsId, options.buyNumber, options.sku)
-    if (res.code == 30002) {
+    if (res.code === 30002) {
       // 需要选择规格尺寸
       const skuCurGoodsRes = await WXAPI.goodsDetail(options.goodsId)
-      if (skuCurGoodsRes.code != 0) {
+      if (skuCurGoodsRes.code !== 0) {
         wx.showToast({
           title: skuCurGoodsRes.msg,
           icon: 'none'
@@ -168,7 +168,7 @@ Page({
       })
       return
     }
-    if (res.code != 0) {
+    if (res.code !== 0) {
       wx.showToast({
         title: res.msg,
         icon: 'none'
@@ -212,9 +212,9 @@ Page({
     const id = e.currentTarget.dataset.id
     // 处理选中
     const skuCurGoods = this.data.skuCurGoods
-    const property = skuCurGoods.properties.find(ele => { return ele.id == pid })
+    const property = skuCurGoods.properties.find(ele => { return ele.id === pid })
     property.childsCurGoods.forEach(ele => {
-      if (ele.id == id) {
+      if (ele.id === id) {
         ele.active = true
       } else {
         ele.active = false
@@ -238,7 +238,7 @@ Page({
         optionValueId: o.id
       })
     })
-    if (sku.length != propertySize) {
+    if (sku.length !== propertySize) {
       wx.showToast({
         title: '请选择规格',
         icon: 'none'

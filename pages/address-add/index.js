@@ -11,7 +11,7 @@ Page({
   },
   async provinces(provinceId, cityId, districtId) {
     const res = await WXAPI.province()
-    if (res.code == 0) {
+    if (res.code === 0) {
       const provinces = [{
         id: 0,
         name: '请选择'
@@ -19,7 +19,7 @@ Page({
       let pIndex = 0
       if (provinceId) {
         pIndex = provinces.findIndex(ele => {
-          return ele.id == provinceId
+          return ele.id === provinceId
         })
       }
       this.setData({
@@ -38,7 +38,7 @@ Page({
       pIndex: index
     })
     const pid = this.data.provinces[index].id
-    if (pid == 0) {
+    if (pid === 0) {
       this.setData({
         cities: null,
         cIndex: 0,
@@ -48,7 +48,7 @@ Page({
       return
     }
     const res = await WXAPI.nextRegion(pid);
-    if (res.code == 0) {
+    if (res.code === 0) {
       const cities = [{
         id: 0,
         name: '请选择'
@@ -56,7 +56,7 @@ Page({
       let cIndex = 0
       if (cityId) {
         cIndex = cities.findIndex(ele => {
-          return ele.id == cityId
+          return ele.id === cityId
         })
       }
       this.setData({
@@ -75,7 +75,7 @@ Page({
       cIndex: index
     })
     const pid = this.data.cities[index].id
-    if (pid == 0) {
+    if (pid === 0) {
       this.setData({
         areas: null,
         aIndex: 0
@@ -83,7 +83,7 @@ Page({
       return
     }
     const res = await WXAPI.nextRegion(pid);
-    if (res.code == 0) {
+    if (res.code === 0) {
       const areas = [{
         id: 0,
         name: '请选择'
@@ -91,7 +91,7 @@ Page({
       let aIndex = 0
       if (districtId) {
         aIndex = areas.findIndex(ele => {
-          return ele.id == districtId
+          return ele.id === districtId
         })
       }
       this.setData({
@@ -111,14 +111,14 @@ Page({
     })  
   },
   async bindSave(e) {
-    if (this.data.pIndex == 0 ) {
+    if (this.data.pIndex === 0 ) {
       wx.showToast({
         title: '请选择省份',
         icon: 'none'
       })
       return
     }
-    if (this.data.cIndex == 0 ) {
+    if (this.data.cIndex === 0 ) {
       wx.showToast({
         title: '请选择城市',
         icon: 'none'
@@ -129,21 +129,21 @@ Page({
     const address = e.detail.value.address;
     const mobile = e.detail.value.mobile;
     const code = '322000';
-    if (linkMan == ""){
+    if (linkMan === ""){
       wx.showToast({
         title: '请填写联系人姓名',
         icon: 'none'
       })
       return
     }
-    if (mobile == ""){
+    if (mobile === ""){
       wx.showToast({
         title: '请填写手机号码',
         icon: 'none'
       })
       return
     }
-    if (address == ""){
+    if (address === ""){
       wx.showToast({
         title: '请填写详细地址',
         icon: 'none'
@@ -174,7 +174,7 @@ Page({
     } else {
       apiResult = await WXAPI.addAddress(postData)
     }
-    if (apiResult.code != 0) {
+    if (apiResult.code !== 0) {
       // 登录错误 
       wx.hideLoading();
       wx.showToast({
@@ -189,7 +189,7 @@ Page({
   async onLoad(e) {
     if (e.id) { // 修改初始化数据库数据
       const res = await WXAPI.addressDetail(wx.getStorageSync('token'), e.id)
-      if (res.code == 0) {
+      if (res.code === 0) {
         this.setData({
           id: e.id,
           addressData: res.data.info
@@ -232,9 +232,9 @@ Page({
         const diatrictName = res.countyName;
         // 读取省
         const pIndex = that.data.provinces.findIndex(ele => {
-          return ele.name == provinceName
+          return ele.name === provinceName
         })
-        if (pIndex != -1) {
+        if (pIndex !== -1) {
           const e = {
             detail: {
               value: pIndex
@@ -243,9 +243,9 @@ Page({
           that.provinceChange(e, 0, 0).then(() => {
             // 读取市
             const cIndex = that.data.cities.findIndex(ele => {
-              return ele.name == cityName
+              return ele.name === cityName
             })
-            if (cIndex != -1) {
+            if (cIndex !== -1) {
               const e = {
                 detail: {
                   value: cIndex
@@ -254,9 +254,9 @@ Page({
               that.cityChange(e, 0).then(() => {
                 // 读取区县
                 const aIndex = that.data.areas.findIndex(ele => {
-                  return ele.name == diatrictName
+                  return ele.name === diatrictName
                 })
-                if (aIndex != -1) {
+                if (aIndex !== -1) {
                   const e = {
                     detail: {
                       value: aIndex

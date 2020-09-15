@@ -57,7 +57,7 @@ Page({
       return
     }
     WXAPI.withDrawApply(wx.getStorageSync('token'), amount).then(function(res) {
-      if (res.code == 0) {
+      if (res.code === 0) {
         wx.showModal({
           title: '成功',
           content: '您的提现申请已提交，等待财务打款',

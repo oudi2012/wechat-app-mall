@@ -102,7 +102,7 @@ Page({
     const res = await WXAPI.goods({
       miaosha: true
     })
-    if (res.code == 0) {
+    if (res.code === 0) {
       res.data.forEach(ele => {
         const _now = new Date().getTime()
         if (ele.dateStart) {
@@ -119,7 +119,7 @@ Page({
   },
   async wxaMpLiveRooms(){
     const res = await WXAPI.wxaMpLiveRooms()
-    if (res.code == 0 && res.data.length > 0) {
+    if (res.code === 0 && res.data.length > 0) {
       this.setData({
         aliveRooms: res.data
       })
@@ -131,7 +131,7 @@ Page({
     const res1 = await WXAPI.banners({
       type: 'index'
     })
-    if (res1.code == 700) {
+    if (res1.code === 700) {
       wx.showModal({
         title: '提示',
         content: '请在后台添加 banner 轮播图片，自定义类型填写 index',
@@ -153,7 +153,7 @@ Page({
   },
   async goodsDynamic(){
     const res = await WXAPI.goodsDynamic(0)
-    if (res.code == 0) {
+    if (res.code === 0) {
       this.setData({
         goodsDynamic: res.data
       })
@@ -162,9 +162,9 @@ Page({
   async categories(){
     const res = await WXAPI.goodsCategory()
     let categories = [];
-    if (res.code == 0) {
+    if (res.code === 0) {
       const _categories = res.data.filter(ele => {
-        return ele.level == 1
+        return ele.level === 1
       })
       categories = categories.concat(_categories)
     }
@@ -182,7 +182,7 @@ Page({
     })
   },
   async getGoodsList(categoryId, append) {
-    if (categoryId == 0) {
+    if (categoryId === 0) {
       categoryId = "";
     }
     wx.showLoading({
@@ -194,7 +194,7 @@ Page({
       pageSize: this.data.pageSize
     })
     wx.hideLoading()
-    if (res.code == 404 || res.code == 700) {
+    if (res.code === 404 || res.code === 700) {
       let newData = {
         loadingMoreHidden: false
       }
@@ -219,7 +219,7 @@ Page({
   getCoupons: function() {
     var that = this;
     WXAPI.coupons().then(function (res) {
-      if (res.code == 0) {
+      if (res.code === 0) {
         that.setData({
           coupons: res.data
         });
@@ -235,7 +235,7 @@ Page({
   getNotice: function() {
     var that = this;
     WXAPI.noticeList({pageSize: 5}).then(function (res) {
-      if (res.code == 0) {
+      if (res.code === 0) {
         that.setData({
           noticeList: res.data
         });
@@ -260,17 +260,17 @@ Page({
     const res = await WXAPI.goods({
       kanjia: true
     });
-    if (res.code == 0) {
+    if (res.code === 0) {
       const kanjiaGoodsIds = []
       res.data.forEach(ele => {
         kanjiaGoodsIds.push(ele.id)
       })
       const goodsKanjiaSetRes = await WXAPI.kanjiaSet(kanjiaGoodsIds.join())
-      if (goodsKanjiaSetRes.code == 0) {
+      if (goodsKanjiaSetRes.code === 0) {
         res.data.forEach(ele => {
           const _process = goodsKanjiaSetRes.data.find(_set => {
             console.log(_set)
-            return _set.goodsId == ele.id
+            return _set.goodsId === ele.id
           })
           console.log(ele)
           console.log(_process)
