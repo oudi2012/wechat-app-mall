@@ -423,7 +423,7 @@ __DEFINE__(1599018547540, function(require, module, exports) {
         ];
 
         // version block
-        const vpat = [
+        var vpat = [
             0xc94, 0x5bc, 0xa99, 0x4d3, 0xbf6, 0x762, 0x847, 0x60d,
             0x928, 0xb78, 0x45d, 0xa17, 0x532, 0x9a6, 0x683, 0x8c9,
             0x7ec, 0xec4, 0x1e1, 0xfab, 0x08e, 0xc1a, 0x33f, 0xd75,
@@ -432,7 +432,7 @@ __DEFINE__(1599018547540, function(require, module, exports) {
         ];
 
         // final format bits with mask: level << 3 | mask
-        const fmtword = [
+        var fmtword = [
             0x77c4, 0x72f3, 0x7daa, 0x789d, 0x662f, 0x6318, 0x6c41, 0x6976,    //L
             0x5412, 0x5125, 0x5e7c, 0x5b4b, 0x45f9, 0x40ce, 0x4f97, 0x4aa0,    //M
             0x355f, 0x3068, 0x3f31, 0x3a06, 0x24b4, 0x2183, 0x2eda, 0x2bed,    //Q
@@ -525,14 +525,14 @@ __DEFINE__(1599018547540, function(require, module, exports) {
 
         // Working buffers:
         // data input and ecc append, image working buffer, fixed part of image, run lengths for badness
-        var strinbuf = [], eccbuf = [], qrframe = [], framask = [], rlens = [];
+        let strinbuf = [], eccbuf = [], qrframe = [], framask = [], rlens = [];
         // Control values - width is based on version, last 4 are from table.
-        var version, width, neccblk1, neccblk2, datablkw, eccblkwid;
-        var ecclevel = 2;
+        let version, width, neccblk1, neccblk2, datablkw, eccblkwid;
+        let ecclevel = 2;
 
         // set bit to indicate cell in qrframe is immutable.  symmetric around diagonal
         function setmask(x, y) {
-            var bt;
+            let bt;
             if (x > y) {
                 bt = x;
                 x = y;
@@ -581,7 +581,7 @@ __DEFINE__(1599018547540, function(require, module, exports) {
 
         // Calculate and append ECC data to data block.  Block is in strinbuf, indexes to buffers given.
         function appendrs(data, dlen, ecbuf, eclen) {
-            var i, j, fb;
+            let i, j, fb;
 
             for (i = 0; i < eclen; i++)
                 strinbuf[ecbuf + i] = 0;
@@ -602,7 +602,7 @@ __DEFINE__(1599018547540, function(require, module, exports) {
 
         // check mask - since symmetrical use half.
         function ismasked(x, y) {
-            var bt;
+            let bt;
             if (x > y) {
                 bt = x;
                 x = y;
@@ -1151,11 +1151,11 @@ __DEFINE__(1599018547540, function(require, module, exports) {
 
                 size = size || _size || Math.min(canvas.width, canvas.height);
 
-                const frame = genframe(string),
+                var frame = genframe(string),
                     ctx = canvas.ctx,
                     px = Math.round(size / (width + 8));
 
-                const roundedSize = px * (width + 8),
+                var roundedSize = px * (width + 8),
                     offset = Math.floor((size - roundedSize) / 2);
 
                 size = roundedSize;
